@@ -50,7 +50,7 @@
         <ul class="list-group">
             {% if tasks %}
                 {% for task in tasks %}
-                {# Determina el cuadrante para aplicar un estilo visual (Paso Futuro: Lógica más robusta de Cuadrantes) #}
+                {# Determina el cuadrante para aplicar un estilo visual #}
                 {% set quadrant_class = '' %}
                 {% if task.is_urgent and task.is_important %}
                     {% set quadrant_class = 'quadrant-1' %}
@@ -74,9 +74,18 @@
                            {% endif %}
                         </a>
                         <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
-                        {# Opcional: Mostrar etiquetas de Urgencia/Importancia #}
-                        {% if task.is_urgent %}<span class="badge bg-danger ms-2">Urgente</span>{% endif %}
-                        {% if task.is_important %}<span class="badge bg-primary ms-1">Importante</span>{% endif %}
+                        {# Mostrar etiquetas de Urgencia/Importancia y NO Urgencia/Importancia #}
+                        {% if task.is_urgent %}
+                            <span class="badge bg-danger ms-2">Urgente</span>
+                        {% else %}
+                            <span class="badge bg-secondary ms-2">No Urgente</span>
+                        {% endif %}
+
+                        {% if task.is_important %}
+                            <span class="badge bg-primary ms-1">Importante</span>
+                        {% else %}
+                            <span class="badge bg-secondary ms-1">No Importante</span>
+                        {% endif %}
                     </div>
                     <div>
                         <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
