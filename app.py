@@ -64,6 +64,27 @@ def add_task():
 
     return redirect(url_for('index'))
 
+@app.route('/update/<int:task_id>', methods=['POST'])
+def update_task(task_id):
+    task_to_update = Task.query.get_or_404(task_id)
+    if request.method == 'POST':
+        updated_content = request.form['content'].strip()
+        # --- Obtener valores de los checkboxes para la actualización ---
+        # Similar a add_task, verificamos si están en request.form
+        updated_is_urgent = 'is_urgent' in request.form
+        updated_is_important = 'is_important' in request.form
+        # -------------------------------------------------------------
+
+        if updated_content:
+            try:
+                task_to_update.content = updated_content
+                task_to_update.is_urgent = updated_is_urgent # Actualiza el estado de urgencia
+                task_to_update.is_important = updated_is_important # Actualiza el estado de importancia
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                print(f"Error al actualizar tarea: {e}")
+    return redirect(url_for('index'))
 
 # --- Ejecutar la Aplicación ---
 if __name__ == '__main__':
