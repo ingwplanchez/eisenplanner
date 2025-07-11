@@ -11,15 +11,23 @@
             color: #6c757d;
         }
         /* Estilos para los cuadrantes (opcional, para visualización futura) */
-        .quadrant-1 { border-left: 5px solid #dc3545; } /* Peligro/Rojo - Hacer */
-        .quadrant-2 { border-left: 5px solid #0d6efd; } /* Primario/Azul - Agendar */
-        .quadrant-3 { border-left: 5px solid #ffc107; } /* Advertencia/Amarillo - Delegar */
-        .quadrant-4 { border-left: 5px solid #6c757d; } /* Secundario/Gris - Eliminar */
+        .quadrant-1 { border-left: 5px solid #dc3545; } /* Rojo - Hacer (Urgente, Importante) */
+        .quadrant-2 { border-left: 5px solid #0d6efd; } /* Azul - Agendar (No Urgente, Importante) */
+        .quadrant-3 { border-left: 5px solid #ffc107; } /* Amarillo - Delegar (Urgente, No Importante) */
+        .quadrant-4 { border-left: 5px solid #6c757d; } /* Gris - Eliminar (No Urgente, No Importante) */
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4 text-center">EisenPlanner: Tu Lista de Tareas</h1>
+
+        <div class="d-flex justify-content-center mb-4 flex-wrap">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-dark btn-sm m-1">Todas las tareas</a>
+            <a href="{{ url_for('index', urgent='true', important='true') }}" class="btn btn-outline-danger btn-sm m-1">Hacer (Urgente/Importante)</a>
+            <a href="{{ url_for('index', urgent='false', important='true') }}" class="btn btn-outline-primary btn-sm m-1">Agendar (Importante/No Urgente)</a>
+            <a href="{{ url_for('index', urgent='true', important='false') }}" class="btn btn-outline-warning btn-sm m-1">Delegar (Urgente/No Importante)</a>
+            <a href="{{ url_for('index', urgent='false', important='false') }}" class="btn btn-outline-secondary btn-sm m-1">Eliminar (No Urgente/No Importante)</a>
+        </div>
 
         <form action="{{ url_for('add_task') }}" method="POST" class="mb-4 p-3 border rounded shadow-sm">
             <div class="mb-3">
