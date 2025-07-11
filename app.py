@@ -1,4 +1,4 @@
-# eisenplaner/app.py
+# eisenplanner/app.py
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -26,17 +26,28 @@ class Task(db.Model):
         return (f'<Task {self.id}: {self.content[:20]}... - C:{self.completed}, '
                 f'Urgent:{self.is_urgent}, Important:{self.is_important}>')
 
-
-# --- PASO CRUCIAL: Recrear la base de datos ---
-# Necesitas hacer esto cada vez que cambies el esquema de la tabla (añadir/quitar/modificar columnas).
-# 1. Detén el servidor Flask (Ctrl+C).
+# NOTA IMPORTANTE: Necesitas RECREAR tu base de datos para que incluya las nuevas columnas.
+# PASO A SEGUIR:
+# 1. COMENTA las siguientes líneas 'db.create_all()' si no lo estaban.
 # 2. ELIMINA el archivo 'todo.db' de tu proyecto.
 # 3. DESCOMENTA las siguientes líneas:
 # with app.app_context():
     # db.create_all()
 # 4. Ejecuta 'python app.py' UNA SOLA VEZ.
 # 5. VUELVE A COMENTAR las líneas 'db.create_all()'.
-# Esto asegura que tu base de datos tenga las nuevas columnas 'is_urgent' y 'is_important'.
+# Esto es necesario porque SQLAlchemy no puede añadir columnas directamente a una tabla existente
+# de esta manera simple. En proyectos más grandes, usarías "migrations" (migraciones) con herramientas
+# como Flask-Migrate o Alembic, pero para este nivel, recrear la DB es lo más directo.
+
+# --- Rutas de la Aplicación ---
+
+@app.route('/')
+def index():
+    # Ahora obtenemos todas las tareas de la base de datos
+    # .all() recupera todos los objetos Task de la tabla
+    # Ahora ordena por ID ascendente para que la tarea más antigua (ID más bajo) aparezca primero.
+    tasks = Task.query.order_by(Task.id.asc()).all()
+    return render_template('index.html', tasks=tasks)
 
 @app.route('/add', methods=['POST'])
 def add_task():
@@ -63,6 +74,34 @@ def add_task():
                 print(f"Error al añadir tarea: {e}")
 
     return redirect(url_for('index'))
+
+@app.route('/delete/<int:task_id>')
+def delete_task(task_id):
+    # Buscamos la tarea por su ID en la base de datos. .first_or_404() devuelve 404 si no la encuentra.
+    task_to_delete = Task.query.get_or_404(task_id)
+    try:
+        db.session.delete(task_to_delete) # Marcamos el objeto para ser eliminado
+        db.session.commit()               # Guardamos los cambios
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al eliminar tarea: {e}")
+    return redirect(url_for('index'))
+
+@app.route('/complete/<int:task_id>')
+def complete_task(task_id):
+    task_to_complete = Task.query.get_or_404(task_id)
+    try:
+        task_to_complete.completed = not task_to_complete.completed # Alternamos el estado
+        db.session.commit() # Guardamos el cambio
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al completar/descompletar tarea: {e}")
+    return redirect(url_for('index'))
+
+@app.route('/edit/<int:task_id>')
+def edit_task(task_id):
+    task = Task.query.get_or_404(task_id) # Obtenemos la tarea para el formulario de edición
+    return render_template('edit.html', task=task)
 
 @app.route('/update/<int:task_id>', methods=['POST'])
 def update_task(task_id):
