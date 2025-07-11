@@ -38,8 +38,32 @@ class Task(db.Model):
 # 5. VUELVE A COMENTAR las líneas 'db.create_all()'.
 # Esto asegura que tu base de datos tenga las nuevas columnas 'is_urgent' y 'is_important'.
 
+@app.route('/add', methods=['POST'])
+def add_task():
+    # global tasks # Ya no es necesario si solo interactúas con la DB
+    # global next_task_id # Ya no es necesario, SQLAlchemy maneja IDs
 
-# ... (el resto de tu código de app.py permanece igual por ahora) ...
+    if request.method == 'POST':
+        task_content = request.form['content'].strip()
+        # --- Obtener valores de los checkboxes ---
+        # Si el checkbox está marcado, request.form.get() devolverá 'on'. Si no, None.
+        # Lo convertimos a un booleano (True si 'on', False si None o cualquier otra cosa).
+        is_urgent = 'is_urgent' in request.form # Más directo para checkboxes: si está en request.form, está marcado
+        is_important = 'is_important' in request.form
+        # ----------------------------------------
+
+        if task_content:
+            # Creamos un nuevo objeto Task con los nuevos valores
+            new_task = Task(content=task_content, is_urgent=is_urgent, is_important=is_important)
+            try:
+                db.session.add(new_task)
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                print(f"Error al añadir tarea: {e}")
+
+    return redirect(url_for('index'))
+
 
 # --- Ejecutar la Aplicación ---
 if __name__ == '__main__':
