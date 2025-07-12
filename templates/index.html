@@ -27,7 +27,7 @@
             color: #6c757d;
         }
 
-        /* Cuadrant Styles - Modo Claro */
+        /* Cuadrant Styles - Aplica a ambos modos, pero será sobrescrito en dark-mode si es necesario */
         /* Cuadrante 1: Hacer (Urgente e Importante) - VERDE */
         .quadrant-1 { border-left: 5px solid #28a745; } /* Bootstrap's success green */
         .quadrant-title.quadrant-1 { color: #28a745; }
@@ -43,6 +43,7 @@
         /* Cuadrante 4: Eliminar (No Urgente, No Importante) - ROJO */
         .quadrant-4 { border-left: 5px solid #dc3545; } /* Bootstrap's danger red */
         .quadrant-title.quadrant-4 { color: #dc3545; }
+
 
         .quadrant-section {
             margin-bottom: 2rem;
@@ -79,8 +80,8 @@
         }
         .quadrant-cell .list-group-item {
             background-color: transparent !important;
-            border: none;
-            padding-left: 0;
+            border: none; /* Asegura que no haya borde general */
+            padding-left: 0; /* Asegura que no haya padding extra del borde */
         }
         .quadrant-cell .list-group {
             flex-grow: 1;
@@ -102,7 +103,7 @@
         }
         body.dark-mode .list-group-item {
             background-color: #454d55;
-            border-color: #5a6268; /* Este es el borde general del item en modo oscuro */
+            border-color: #5a6268; /* Borde general del item en modo oscuro */
             color: #f8f9fa;
         }
         body.dark-mode .completed {
@@ -134,13 +135,6 @@
         body.dark-mode .quadrant-cell.quadrant-2 { border-color: #ffc107; } /* Amarillo/Naranja */
         body.dark-mode .quadrant-cell.quadrant-3 { border-color: #0d6efd; } /* Azul */
         body.dark-mode .quadrant-cell.quadrant-4 { border-color: #dc3545; } /* Rojo */
-
-        /* --- NUEVO: Colores de border-left para las tareas individuales en MODO OSCURO --- */
-        body.dark-mode .list-group-item.quadrant-1 { border-left: 5px solid #28a745; } /* Verde */
-        body.dark-mode .list-group-item.quadrant-2 { border-left: 5px solid #ffc107; } /* Amarillo/Naranja */
-        body.dark-mode .list-group-item.quadrant-3 { border-left: 5px solid #0d6efd; } /* Azul */
-        body.dark-mode .list-group-item.quadrant-4 { border-left: 5px solid #dc3545; } /* Rojo */
-        /* --------------------------------------------------------------------------------- */
 
         /* Ajuste para los botones de alternancia de modo oscuro/claro */
         .mode-toggle {
