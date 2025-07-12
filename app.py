@@ -17,7 +17,8 @@ class Task(db.Model):
     completed = db.Column(db.Boolean, default=False)
     is_urgent = db.Column(db.Boolean, default=False, nullable=False)
     is_important = db.Column(db.Boolean, default=False, nullable=False)
-    due_date = db.Column(db.DateTime, nullable=True) # AQUI
+    due_date = db.Column(db.DateTime, nullable=True) # Mantenemos due_date para este archivo, aunque el plan es pasar a 2.0
+
 
     def __repr__(self):
         return (f'<Task {self.id}: {self.content[:20]}... - C:{self.completed}, '
@@ -25,14 +26,18 @@ class Task(db.Model):
                 f'Due:{self.due_date.strftime("%Y-%m-%d") if self.due_date else "None"}>')
 
 # NOTA: Asegúrate de que db.create_all() esté COMENTADO aquí.
+# Si estás trabajando en tu proyecto "original" de EisenPlanner, NO NECESITAS recrear la DB si ya tienes due_date.
 # with app.app_context():
-    # db.create_all()
+#     db.create_all()
 
 
 @app.route('/')
 def index():
     filter_urgent = request.args.get('urgent')
     filter_important = request.args.get('important')
+    # --- NUEVO: Obtener el modo de vista de la URL ---
+    view_mode = request.args.get('view_mode', 'list') # Por defecto, 'list' (agrupada), puede ser 'matrix'
+    # ------------------------------------------------
 
     query = Task.query
 
@@ -46,9 +51,7 @@ def index():
     elif filter_important == 'false':
         query = query.filter_by(is_important=False)
 
-    # Opcional: Ordenar por due_date (primero las más cercanas, luego por ID)
-    query = query.order_by(Task.due_date.asc(), Task.id.asc())
-
+    query = query.order_by(Task.due_date.asc(), Task.id.asc()) # Ordenamos por fecha limite y luego ID
     all_filtered_tasks = query.all()
 
     quadrants = {
@@ -68,10 +71,32 @@ def index():
         elif not task.is_urgent and not task.is_important:
             quadrants['eliminate']['tasks'].append(task)
 
+    # --- NUEVO: Calcular contadores de tareas por cuadrante ---
+    # Esto es solo para la vista de "Todas las tareas agrupadas"
+    quadrant_counts = {
+        'do': len(quadrants['do']['tasks']),
+        'schedule': len(quadrants['schedule']['tasks']),
+        'delegate': len(quadrants['delegate']['tasks']),
+        'eliminate': len(quadrants['eliminate']['tasks']),
+    }
+    # -----------------------------------------------------------
+
+
     if filter_urgent is None and filter_important is None:
-        return render_template('index.html', quadrants=quadrants, show_all_quadrants=True)
+        return render_template('index.html',
+                               quadrants=quadrants,
+                               quadrant_counts=quadrant_counts, # Pasamos los contadores
+                               show_all_quadrants=True,
+                               view_mode=view_mode # Pasamos el modo de vista
+                               )
     else:
-        return render_template('index.html', tasks=all_filtered_tasks, show_all_quadrants=False)
+        return render_template('index.html',
+                               tasks=all_filtered_tasks,
+                               show_all_quadrants=False,
+                               view_mode=view_mode # Pasamos el modo de vista
+                               )
+
+# ... (el resto de tus rutas existentes: add_task, delete_task, complete_task, edit_task, update_task) ...
 
 @app.route('/add', methods=['POST'])
 def add_task():
@@ -79,17 +104,13 @@ def add_task():
         task_content = request.form['content'].strip()
         is_urgent = 'is_urgent' in request.form
         is_important = 'is_important' in request.form
-        # --- NUEVO: Obtener la fecha límite ---
         due_date_str = request.form.get('due_date')
         due_date = None
-        if due_date_str: # Solo intenta convertir si la cadena no está vacía
+        if due_date_str:
             try:
-                # Convertir la cadena de fecha (YYYY-MM-DD) a un objeto datetime
                 due_date = datetime.datetime.strptime(due_date_str, '%Y-%m-%d')
             except ValueError:
-                # Manejar error si el formato de fecha es incorrecto (opcional)
                 print(f"Advertencia: Fecha límite '{due_date_str}' en formato incorrecto.")
-        # --------------------------------------
 
         if task_content:
             new_task = Task(content=task_content, is_urgent=is_urgent, is_important=is_important, due_date=due_date)
@@ -135,7 +156,6 @@ def update_task(task_id):
         updated_content = request.form['content'].strip()
         updated_is_urgent = 'is_urgent' in request.form
         updated_is_important = 'is_important' in request.form
-        # --- NUEVO: Obtener y procesar la fecha límite para la actualización ---
         updated_due_date_str = request.form.get('due_date')
         updated_due_date = None
         if updated_due_date_str:
@@ -143,20 +163,19 @@ def update_task(task_id):
                 updated_due_date = datetime.datetime.strptime(updated_due_date_str, '%Y-%m-%d')
             except ValueError:
                 print(f"Advertencia: Fecha límite actualizada '{updated_due_date_str}' en formato incorrecto.")
-        # ---------------------------------------------------------------------
 
         if updated_content:
             try:
                 task_to_update.content = updated_content
                 task_to_update.is_urgent = updated_is_urgent
                 task_to_update.is_important = updated_is_important
-                task_to_update.due_date = updated_due_date # Asigna la fecha límite
+                task_to_update.due_date = updated_due_date
                 db.session.commit()
             except Exception as e:
                 db.session.rollback()
                 print(f"Error al actualizar tarea: {e}")
     return redirect(url_for('index'))
 
-# --- Ejecutar la Aplicación ---
+
 if __name__ == '__main__':
     app.run(debug=True)
