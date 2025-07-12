@@ -31,7 +31,7 @@ class Task(db.Model):
 # 2. ELIMINA el archivo 'todo.db' de tu proyecto.
 # 3. DESCOMENTA las siguientes líneas:
 # with app.app_context(): # <-- DESCOMENTA PARA RECREAR LA DB SIN due_date
-    # db.create_all()    # <-- DESCOMENTA PARA RECREAR LA DB SIN due_date
+#     db.create_all()    # <-- DESCOMENTA PARA RECREAR LA DB SIN due_date
 # 4. Ejecuta 'python app.py' UNA SOLA VEZ.
 # 5. VUELVE A COMENTAR estas líneas después de la ejecución exitosa.
 
@@ -60,10 +60,10 @@ def index():
     all_filtered_tasks = query.all()
 
     quadrants = {
-        'do': {'title': 'Cuadrante 1: Hacer (Urgente e Importante)', 'tasks': [], 'class': 'quadrant-1'},
-        'schedule': {'title': 'Cuadrante 2: Agendar (Importante, No Urgente)', 'tasks': [], 'class': 'quadrant-2'},
-        'delegate': {'title': 'Cuadrante 3: Delegar (Urgente, No Importante)', 'tasks': [], 'class': 'quadrant-3'},
-        'eliminate': {'title': 'Cuadrante 4: Eliminar (No Urgente, No Importante)', 'tasks': [], 'class': 'quadrant-4'},
+        'do': {'title': 'Cuadrante 1: Hacer (Hoy o mañana)', 'tasks': [], 'class': 'quadrant-1'},
+        'schedule': {'title': 'Cuadrante 2: Agendar (Próximas semanas)', 'tasks': [], 'class': 'quadrant-2'},
+        'delegate': {'title': 'Cuadrante 3: Delegar (Hacer ahora)', 'tasks': [], 'class': 'quadrant-3'},
+        'eliminate': {'title': 'Cuadrante 4: Eliminar (Posponer)', 'tasks': [], 'class': 'quadrant-4'},
     }
 
     for task in all_filtered_tasks:
@@ -103,13 +103,6 @@ def add_task():
         task_content = request.form['content'].strip()
         is_urgent = 'is_urgent' in request.form
         is_important = 'is_important' in request.form
-        # due_date_str = request.form.get('due_date') # <-- ELIMINA ESTA LÍNEA O COMENTALA
-        # due_date = None # <-- ELIMINA ESTA LÍNEA O COMENTALA
-        # if due_date_str: # <-- ELIMINA ESTE BLOQUE IF O COMENTALO
-        #     try:
-        #         due_date = datetime.datetime.strptime(due_date_str, '%Y-%m-%d')
-        #     except ValueError:
-        #         print(f"Advertencia: Fecha límite '{due_date_str}' en formato incorrecto.")
 
         if task_content:
             # new_task = Task(content=task_content, is_urgent=is_urgent, is_important=is_important, due_date=due_date) # <-- MODIFICA ESTA LÍNEA
@@ -156,13 +149,6 @@ def update_task(task_id):
         updated_content = request.form['content'].strip()
         updated_is_urgent = 'is_urgent' in request.form
         updated_is_important = 'is_important' in request.form
-        # updated_due_date_str = request.form.get('due_date') # <-- ELIMINA ESTA LÍNEA O COMENTALA
-        # updated_due_date = None # <-- ELIMINA ESTA LÍNEA O COMENTALA
-        # if updated_due_date_str: # <-- ELIMINA ESTE BLOQUE IF O COMENTALO
-        #     try:
-        #         updated_due_date = datetime.datetime.strptime(updated_due_date_str, '%Y-%m-%d')
-        #     except ValueError:
-        #         print(f"Advertencia: Fecha límite actualizada '{updated_due_date_str}' en formato incorrecto.")
 
         if updated_content:
             try:

@@ -136,6 +136,12 @@
         body.dark-mode .quadrant-cell.quadrant-3 { border-color: #0d6efd; }
         body.dark-mode .quadrant-cell.quadrant-4 { border-color: #dc3545; }
 
+        /* Asegura que los bordes de color de los cuadrantes permanezcan en modo oscuro en la vista de lista */
+        body.dark-mode .list-group-item.quadrant-1 { border-left-color: #28a745; }
+        body.dark-mode .list-group-item.quadrant-2 { border-left-color: #ffc107; }
+        body.dark-mode .list-group-item.quadrant-3 { border-left-color: #0d6efd; }
+        body.dark-mode .list-group-item.quadrant-4 { border-left-color: #dc3545; }
+
         /* Ajuste para los botones de alternancia de modo oscuro/claro */
         .mode-toggle {
             position: absolute;
@@ -172,11 +178,14 @@
             &#9728; </button>
     </div>
     <div class="container mt-5">
-        <h1 class="mb-4 text-center">EisenPlanner: Tu Lista de Tareas</h1>
+        <h1 class="mb-4 text-center">EisenPlanner: Tu Gestor de Tareas</h1>
 
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <div class="d-flex flex-wrap gap-2">
-                <a href="{{ url_for('index', view_mode=view_mode) }}" class="btn btn-outline-dark btn-sm">Todas las tareas</a>
+                <a href="{{ url_for('index', view_mode=view_mode) }}"
+                class="btn btn-outline-dark btn-sm {% if not request.args.get('urgent') and not request.args.get('important') %}active{% endif %}">
+                    Todas 
+                </a>
                 <a href="{{ url_for('index', urgent='true', important='true', view_mode=view_mode) }}" class="btn btn-outline-success btn-sm">Hacer</a>
                 <a href="{{ url_for('index', urgent='false', important='true', view_mode=view_mode) }}" class="btn btn-outline-warning btn-sm">Agendar</a>
                 <a href="{{ url_for('index', urgent='true', important='false', view_mode=view_mode) }}" class="btn btn-outline-primary btn-sm">Delegar</a>
