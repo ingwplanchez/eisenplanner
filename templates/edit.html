@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" id="taskContent" name="content" value="{{ task.content }}" required>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-6"> {# Ajustamos a col-md-6 #}
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="editIsUrgent" name="is_urgent" {% if task.is_urgent %}checked{% endif %}>
                         <label class="form-check-label" for="editIsUrgent">
@@ -25,7 +25,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6"> {# Ajustamos a col-md-6 #}
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="editIsImportant" name="is_important" {% if task.is_important %}checked{% endif %}>
                         <label class="form-check-label" for="editIsImportant">
@@ -33,12 +33,11 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="editDueDate" class="form-label">Fecha Límite:</label>
-                    {# Formateamos la fecha a 'YYYY-MM-DD' para que el input type="date" la reconozca #}
-                    <input type="date" class="form-control" id="editDueDate" name="due_date"
-                           value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}">
-                </div>
+                {# <div class="col-md-4"> #}
+                {#     <label for="editDueDate" class="form-label">Fecha Límite:</label> #}
+                {#     <input type="date" class="form-control" id="editDueDate" name="due_date" #}
+                {#            value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}"> #}
+                {# </div> #} {# <-- ELIMINA O COMENTA ESTE DIV COMPLETO #}
             </div>
             <button type="submit" class="btn btn-success me-2">Guardar Cambios</button>
             <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
