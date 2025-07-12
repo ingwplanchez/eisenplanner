@@ -17,23 +17,27 @@
                 <input type="text" class="form-control" id="taskContent" name="content" value="{{ task.content }}" required>
             </div>
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-md-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="editIsUrgent" name="is_urgent" {% if task.is_urgent %}checked{% endif %}>
-                        {# 'checked' atributo: Si task.is_urgent es True, el checkbox aparecerá marcado #}
                         <label class="form-check-label" for="editIsUrgent">
                             Urgente
                         </label>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="editIsImportant" name="is_important" {% if task.is_important %}checked{% endif %}>
-                        {# 'checked' atributo: Si task.is_important es True, el checkbox aparecerá marcado #}
                         <label class="form-check-label" for="editIsImportant">
                             Importante
                         </label>
                     </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="editDueDate" class="form-label">Fecha Límite:</label>
+                    {# Formateamos la fecha a 'YYYY-MM-DD' para que el input type="date" la reconozca #}
+                    <input type="date" class="form-control" id="editDueDate" name="due_date"
+                           value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}">
                 </div>
             </div>
             <button type="submit" class="btn btn-success me-2">Guardar Cambios</button>
