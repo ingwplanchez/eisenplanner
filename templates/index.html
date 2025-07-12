@@ -27,7 +27,7 @@
             color: #6c757d;
         }
 
-        /* Cuadrant Styles */
+        /* Cuadrant Styles - Modo Claro */
         /* Cuadrante 1: Hacer (Urgente e Importante) - VERDE */
         .quadrant-1 { border-left: 5px solid #28a745; } /* Bootstrap's success green */
         .quadrant-title.quadrant-1 { color: #28a745; }
@@ -102,7 +102,7 @@
         }
         body.dark-mode .list-group-item {
             background-color: #454d55;
-            border-color: #5a6268;
+            border-color: #5a6268; /* Este es el borde general del item en modo oscuro */
             color: #f8f9fa;
         }
         body.dark-mode .completed {
@@ -122,23 +122,25 @@
         body.dark-mode .quadrant-section,
         body.dark-mode .quadrant-cell {
             background-color: #454d55;
-            /* Remover el border-color general de #5a6268 para quadrant-cell aquí,
-            ya que lo definiremos por cada clase específica de cuadrante.
-            Si la regla general está, asegúrate de que sea menos específica
-            o que las reglas individuales la sobrescriban. */
-            border-color: #5a6268; /* Deja este color para las secciones de lista, pero las celdas individuales lo sobrescribirán */
+            border-color: #5a6268;
             box-shadow: none;
         }
         body.dark-mode .quadrant-title {
             color: #f8f9fa !important; /* Blanco para resaltar en modo oscuro */
         }
 
-        /* --- NUEVO: Colores de borde para las celdas de la matriz en MODO OSCURO --- */
+        /* Colores de borde para las celdas de la matriz en MODO OSCURO */
         body.dark-mode .quadrant-cell.quadrant-1 { border-color: #28a745; } /* Verde */
         body.dark-mode .quadrant-cell.quadrant-2 { border-color: #ffc107; } /* Amarillo/Naranja */
         body.dark-mode .quadrant-cell.quadrant-3 { border-color: #0d6efd; } /* Azul */
         body.dark-mode .quadrant-cell.quadrant-4 { border-color: #dc3545; } /* Rojo */
-        /* ------------------------------------------------------------------------- */
+
+        /* --- NUEVO: Colores de border-left para las tareas individuales en MODO OSCURO --- */
+        body.dark-mode .list-group-item.quadrant-1 { border-left: 5px solid #28a745; } /* Verde */
+        body.dark-mode .list-group-item.quadrant-2 { border-left: 5px solid #ffc107; } /* Amarillo/Naranja */
+        body.dark-mode .list-group-item.quadrant-3 { border-left: 5px solid #0d6efd; } /* Azul */
+        body.dark-mode .list-group-item.quadrant-4 { border-left: 5px solid #dc3545; } /* Rojo */
+        /* --------------------------------------------------------------------------------- */
 
         /* Ajuste para los botones de alternancia de modo oscuro/claro */
         .mode-toggle {
