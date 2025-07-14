@@ -1,6 +1,10 @@
-# 🧭 Eisenplanner
+# Eisenplanner: Tu Gestor de Tareas Esencial
 
-**Eisenplanner** es una aplicación de gestión de tareas basada en la matriz de Eisenhower. El objetivo es ayudarte a clasificar tus pendientes según su urgencia e importancia, optimizando tu tiempo y decisiones.
+## Descripción del Proyecto
+
+EisenPlanner es una aplicación web intuitiva diseñada para ayudarte a organizar tus tareas usando la **Matriz de Eisenhower**. Esta herramienta te permite clasificar tus pendientes en cuatro cuadrantes (Hacer, Agendar, Delegar, Eliminar) según su urgencia e importancia, facilitando la priorización y la gestión efectiva de tu tiempo.
+
+Desarrollada con **Flask** para el backend y **Bootstrap 5** para una interfaz responsiva y moderna, EisenPlanner es una solución sencilla pero poderosa para mantenerte productivo y enfocado en lo que realmente importa.
 
 ---
 
@@ -12,7 +16,23 @@ Este proyecto nace como una evolución del código de [Flasktasker v2.0](https:/
 
 ---
 
-## 🚀 Características actuales (versión inicial)
+## ⚙️ Tecnologías usadas
+
+* **Backend:**
+    * Python 3
+    * Flask
+    * SQLite (para la base de datos local)
+    * SQLAlchemy (ORM para la interacción con la base de datos)
+* **Frontend:**
+    * HTML5
+    * CSS3 (Estilos personalizados y overrides de Bootstrap)
+    * JavaScript
+    * Bootstrap 5.3.3
+    * Bootstrap Icons 1.11.3
+
+---
+
+## 🚀 Características (versión inicial)
 
 - CRUD de tareas usando Flask y SQLAlchemy
 - Estructura adaptable para nuevas funcionalidades
@@ -20,22 +40,128 @@ Este proyecto nace como una evolución del código de [Flasktasker v2.0](https:/
 
 ---
 
-## 🌱 Próximos pasos
+## 🎯 Características Principales
 
-- Visualización interactiva de tareas según cuadrantes
-- Etiquetado automático por urgencia/importancia
-- Vista de Lista y de cuadrantes
-- Fechas límite
-- Modo Oscuro
+* **Clasificación de Tareas con la Matriz de Eisenhower:**
+    * **Hacer (Urgente e Importante):** Tareas que requieren atención inmediata.
+    * **Agendar (Importante, No Urgente):** Tareas cruciales que deben planificarse.
+    * **Delegar (Urgente, No Importante):** Tareas que se pueden asignar a otros.
+    * **Eliminar (No Urgente, No Importante):** Tareas que no contribuyen a tus objetivos y pueden descartarse.
+* **Gestión Completa de Tareas (CRUD):**
+    * **Crear:** Añade nuevas tareas con su respectivo nivel de urgencia e importancia.
+    * **Leer:** Visualiza todas tus tareas filtradas por cuadrante o en una lista consolidada.
+    * **Actualizar (Editar/Completar):** Edita el contenido de las tareas y marca si están completadas o pendientes.
+    * **Eliminar:** Borra tareas que ya no necesitas.
+* **Múltiples Vistas de Tareas:**
+    * **Vista de Lista:** Presenta las tareas agrupadas por cuadrante en un formato de lista vertical.
+    * **Vista de Matriz 2x2:** Ofrece una representación visual directa de los cuatro cuadrantes, mostrando las tareas dentro de su clasificación correspondiente.
+* **Filtrado Rápido:** Botones de filtro para ver rápidamente las tareas de un cuadrante específico (Hacer, Agendar, Delegar, Eliminar) o todas las tareas.
+* **Modo Oscuro/Claro:** Alterna entre un tema de interfaz claro y oscuro para una experiencia de usuario cómoda en cualquier entorno de iluminación. La preferencia se guarda localmente en el navegador.
+* **Interfaz Responsiva:** Adaptada para funcionar y verse bien en dispositivos de diferentes tamaños, desde computadoras de escritorio hasta teléfonos móviles.
 
 ---
 
-## ⚙️ Tecnologías usadas
+## ✅ Mejoras Implementadas
 
-- Python + Flask
-- SQLAlchemy
-- Jinja2
-- HTML + Bootstrap (v5)
+- [x] Visualización interactiva de tareas según cuadrantes
+- [x] Etiquetado automático por urgencia/importancia
+- [x] Vista de Lista y de cuadrantes
+- [x] Fechas límite
+- [x] Modo Oscuro
+
+---
+
+## 🌱 Próximos Pasos
+
+- Fechas limite (Ley de Parkinson)
+- Sección de Tareas completadas
+- Perfil de invitado (Sin persistencia de Datos)
+- Autenticación de usuarios
+
+---
+
+## Cómo Ejecutar el Proyecto Localmente
+
+Para configurar y ejecutar EisenPlanner en tu máquina local, sigue estos pasos:
+
+1.  **Clona el repositorio:**
+    ```bash
+    git clone https://github.com/tu-usuario/EisenPlanner.git
+    cd EisenPlanner
+    ```
+    (Asegúrate de reemplazar `tu-usuario/EisenPlanner.git` con la URL real de tu repositorio).
+
+2.  **Crea un entorno virtual (recomendado):**
+    ```bash
+    python -m venv venv
+    ```
+
+3.  **Activa el entorno virtual:**
+    * En Windows:
+        ```bash
+        .\venv\Scripts\activate
+        ```
+    * En macOS/Linux:
+        ```bash
+        source venv/bin/activate
+        ```
+
+4.  **Instala las dependencias:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    (Asegúrate de tener un archivo `requirements.txt` en la raíz de tu proyecto con `Flask` y `Flask-SQLAlchemy` listados).
+
+5.  **Inicializa la base de datos:**
+    ```bash
+    python -c "from app import db; db.create_all()"
+    ```
+    (Esto asume que tu archivo principal de Flask se llama `app.py` y que `db` está definido allí).
+
+6.  **Ejecuta la aplicación:**
+    ```bash
+    flask run
+    ```
+
+    Si tu archivo principal de Flask no se llama `app.py`, necesitarás establecer la variable de entorno `FLASK_APP` antes de `flask run`:
+    * En Windows (CMD):
+        ```bash
+        set FLASK_APP=nombre_de_tu_app.py
+        flask run
+        ```
+    * En Windows (PowerShell):
+        ```powershell
+        $env:FLASK_APP="nombre_de_tu_app.py"
+        flask run
+        ```
+    * En macOS/Linux:
+        ```bash
+        export FLASK_APP=nombre_de_tu_app.py
+        flask run
+        ```
+
+7.  **Accede a la aplicación:**
+    Abre tu navegador web y ve a `http://127.0.0.1:5000/`.
+
+## Estructura del Proyecto (Ejemplo)
+
+```
+EisenPlanner/
+├── venv/
+├── app.py              # Archivo principal de Flask
+├── requirements.txt    # Dependencias del proyecto
+├── instance/           # Base de datos SQLite (generada al ejecutar db.create_all())
+│   └── eisenplanner.db
+├── templates/
+│   └── index.html      # Plantilla principal
+│   └── edit_task.html  # Plantilla para editar tareas (si existe)
+└── static/
+    ├── css/
+    │   └── styles.css  # Archivos CSS personalizados (si existen)
+    └── icons/          # Íconos de la aplicación (si existen)
+        └── icon-192x192.png
+        └── ...
+```
 
 ---
 
