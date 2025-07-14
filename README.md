@@ -66,17 +66,17 @@ Este proyecto nace como una evolución del código de [Flasktasker v2.0](https:/
 - [x] Visualización interactiva de tareas según cuadrantes
 - [x] Etiquetado automático por urgencia/importancia
 - [x] Vista de Lista y de cuadrantes
-- [x] Fechas límite
+- [x] Fechas límite (Ley de Parkinson)
+- [x] Tareas ordenadas por fecha de vencimiento
 - [x] Modo Oscuro
 
 ---
 
 ## 🌱 Próximos Pasos
 
-- Fechas limite (Ley de Parkinson)
-- Sección de Tareas completadas
+- Sección de Tareas completadas (Opcional)
 - Perfil de invitado (Sin persistencia de Datos)
-- Autenticación de usuarios
+- Autenticación de usuarios (Con persistencia de Datos)
 
 ---
 
@@ -142,6 +142,8 @@ Para configurar y ejecutar EisenPlanner en tu máquina local, sigue estos pasos:
 
 7.  **Accede a la aplicación:**
     Abre tu navegador web y ve a `http://127.0.0.1:5000/`.
+
+---
 
 ## Estructura del Proyecto (Ejemplo)
 

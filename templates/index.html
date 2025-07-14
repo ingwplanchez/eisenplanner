@@ -17,7 +17,7 @@
             border-radius: 0.5rem;
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
             transition: background-color 0.3s, box-shadow 0.3s;
-            position: relative; /* Asegura que los elementos posicionados absolutos dentro de él se posicionen con respecto a él si fuera necesario, aunque ya no es el caso para los botones de vista */
+            position: relative; /* Para posicionar los botones de toggle */
         }
         .list-group-item {
             border-color: #e9ecef;
@@ -28,78 +28,70 @@
             color: #6c757d;
         }
 
-        /* Cuadrant Styles - Aplica a ambos modos, pero será sobrescrito en dark-mode si es necesario */
-        /* Cuadrante 1: Hacer (Urgente e Importante) - VERDE */
-        /* .quadrant-1 { border-left: 5px solid #28a745; } 
-        .quadrant-title.quadrant-1 { color: #28a745; } */
+        /* Colores de Cuadrantes (Ajustados a tu preferencia: 1 Verde, 2 Amarillo, 3 Azul, 4 Rojo) */
+        /* Cuadrante 1: Hacer (Urgente & Importante) - Verde */
+        /*.quadrant-1 { border-left: 5px solid #28a745; }
+        .quadrant-title.quadrant-1 { color: #28a745; }*/
+        .badge.bg-quadrant-1 { background-color: #28a745 !important; }
 
-        /* Cuadrante 2: Agendar (Importante, No Urgente) - AMARILLO/NARANJA */
-        /*.quadrant-2 { border-left: 5px solid #ffc107; } 
-        .quadrant-title.quadrant-2 { color: #ffc107; } */
+        /* Cuadrante 2: Agendar (Importante, No Urgente) - Amarillo */
+        /*.quadrant-2 { border-left: 5px solid #ffc107; }
+        .quadrant-title.quadrant-2 { color: #ffc107; }*/
+        .badge.bg-quadrant-2 { background-color: #ffc107 !important; }
 
-        /* Cuadrante 3: Delegar (Urgente, No Importante) - AZUL */
-        /*.quadrant-3 { border-left: 5px solid #0d6efd; } 
-        .quadrant-title.quadrant-3 { color: #0d6efd; } */
+        /* Cuadrante 3: Delegar (Urgente, No Importante) - Azul */
+        /*.quadrant-3 { border-left: 5px solid #0d6efd; }
+        .quadrant-title.quadrant-3 { color: #0d6efd; }*/
+        .badge.bg-quadrant-3 { background-color: #0d6efd !important; }
 
-        /* Cuadrante 4: Eliminar (No Urgente, No Importante) - ROJO */
-        /*.quadrant-4 { border-left: 5px solid #dc3545; } 
+        /* Cuadrante 4: Eliminar (No Urgente, No Importante) - Rojo */
+        /*.quadrant-4 { border-left: 5px solid #dc3545; }
         .quadrant-title.quadrant-4 { color: #dc3545; }*/
+        .badge.bg-quadrant-4 { background-color: #dc3545 !important; }
 
+        /* Estilos generales de cuadrante */
         .quadrant-section {
             margin-bottom: 2rem;
-            border: 1px solid #dee2e6;
+            border: 1px solid #dee2e6; /* Borde sutil para cada sección */
             border-radius: .25rem;
             padding: 1rem;
-            background-color: #f8f9fa;
-            transition: background-color 0.3s, border-color 0.3s;
+            background-color: #f8f9fa; /* Fondo ligeramente gris para secciones */
         }
+        /* Colores de borde para las secciones de la lista en modo claro */
+        .quadrant-section.quadrant-1 { border-color: #28a745; } /* Verde */
+        .quadrant-section.quadrant-2 { border-color: #ffc107; } /* Amarillo */
+        .quadrant-section.quadrant-3 { border-color: #0d6efd; } /* Azul */
+        .quadrant-section.quadrant-4 { border-color: #dc3545; } /* Rojo */
+
+
         .quadrant-title {
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 1rem;
-            color: #343a40; /* Color por defecto en modo claro */
+            color: #343a40;
         }
 
-        /* Estilos para la vista de Matriz 2x2 */
+        /* Grid de Cuadrantes para Vista de Matriz */
         .quadrant-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1rem;
         }
         .quadrant-cell {
             border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            padding: 1.5rem;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
+            /*border-left: 5px solid;  Placeholder for colored border */
+            padding: 1rem;
+            border-radius: 0.3rem;
             background-color: #f8f9fa;
-            box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
-        .quadrant-cell .list-group-item {
-            background-color: transparent !important;
-            border: none;
-            padding-left: 0;
-        }
-        .quadrant-cell .list-group {
-            flex-grow: 1;
-        }
-
-        /* Colores de borde para las celdas de la lista en modo claro */
-        .quadrant-section.quadrant-1 { border-color: #28a745; }
-        .quadrant-section.quadrant-2 { border-color: #ffc107; }
-        .quadrant-section.quadrant-3 { border-color: #0d6efd; }
-        .quadrant-section.quadrant-4 { border-color: #dc3545; }
-
         /* Colores de borde para las celdas de la matriz en modo claro */
-        .quadrant-cell.quadrant-1 { border-color: #28a745; }
-        .quadrant-cell.quadrant-2 { border-color: #ffc107; }
-        .quadrant-cell.quadrant-3 { border-color: #0d6efd; }
-        .quadrant-cell.quadrant-4 { border-color: #dc3545; }
+        .quadrant-cell.quadrant-1 { border-color: #28a745; } /* Verde */
+        .quadrant-cell.quadrant-2 { border-color: #ffc107; } /* Amarillo */
+        .quadrant-cell.quadrant-3 { border-color: #0d6efd; } /* Azul */
+        .quadrant-cell.quadrant-4 { border-color: #dc3545; } /* Rojo */
 
-        /* Estilos para Modo Oscuro */
+
+        /* Dark Mode Styles */
         body.dark-mode {
             background-color: #212529;
             color: #f8f9fa;
@@ -134,34 +126,21 @@
             box-shadow: none;
         }
         body.dark-mode .quadrant-title {
-            color: #f8f9fa !important;
+            color: #f8f9fa !important; /* Override specific colors in dark mode */
         }
+        /* Dark Mode Border Colors for Quadrants (usando tus colores para consistencia) */
+        body.dark-mode .quadrant-1 { border-color: #28a745; } /* Verde */
+        body.dark-mode .quadrant-2 { border-color: #ffc107; } /* Amarillo */
+        body.dark-mode .quadrant-3 { border-color: #0d6efd; } /* Azul */
+        body.dark-mode .quadrant-4 { border-color: #dc3545; } /* Rojo */
 
-        /* Colores de borde para las celdas de la lista en modo Oscuro */
-        body.dark-mode .quadrant-section.quadrant-1 { border-color: #28a745; }
-        body.dark-mode .quadrant-section.quadrant-2 { border-color: #ffc107; }
-        body.dark-mode .quadrant-section.quadrant-3 { border-color: #0d6efd; }
-        body.dark-mode .quadrant-section.quadrant-4 { border-color: #dc3545; }
-
-        /* Colores de borde para las celdas de la matriz en MODO OSCURO */
-        body.dark-mode .quadrant-cell.quadrant-1 { border-color: #28a745; }
-        body.dark-mode .quadrant-cell.quadrant-2 { border-color: #ffc107; }
-        body.dark-mode .quadrant-cell.quadrant-3 { border-color: #0d6efd; }
-        body.dark-mode .quadrant-cell.quadrant-4 { border-color: #dc3545; }
-
-        /* Asegura que los bordes de color de los cuadrantes permanezcan en modo oscuro en la vista de lista */
-        body.dark-mode .list-group-item.quadrant-1 { border-left-color: #28a745; }
-        body.dark-mode .list-group-item.quadrant-2 { border-left-color: #ffc107; }
-        body.dark-mode .list-group-item.quadrant-3 { border-left-color: #0d6efd; }
-        body.dark-mode .list-group-item.quadrant-4 { border-left-color: #dc3545; }
-
-        /* Ajuste para los botones de alternancia de modo oscuro/claro */
+        /* Mode and View Toggle Buttons */
         .mode-toggle {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
         }
-        .mode-toggle .btn {
+        .mode-toggle .btn, .view-mode-toggle .btn {
             width: 40px;
             height: 40px;
             display: flex;
@@ -170,48 +149,39 @@
             font-size: 1.2rem;
             padding: 0;
         }
-
-        /* MODIFICADO: Estilos para los botones de vista de íconos (quitamos posicionamiento absoluto) */
-        .view-mode-toggle .btn {
-            width: 40px;
-            height: 40px;
+        .view-mode-toggle {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            padding: 0;
+            gap: 0.5rem;
         }
-        /* FIN MODIFICADO */
-
     </style>
 </head>
 <body>
     <div class="mode-toggle">
         <button id="darkModeToggle" class="btn btn-outline-secondary">
-            &#9728; </button>
+            <i class="bi bi-moon-fill"></i> </button>
     </div>
     <div class="container mt-5">
         <h1 class="mb-4 text-center">EisenPlanner: Tu Gestor de Tareas</h1>
 
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <div class="d-flex flex-wrap gap-2">
-                <a href="{{ url_for('index', view_mode=view_mode) }}"
-                class="btn btn-outline-dark btn-sm {% if not request.args.get('urgent') and not request.args.get('important') %}active{% endif %}">
-                    Todas 
+                <a href="{{ url_for('index', view_mode=view_mode, urgent=None, important=None) }}"
+                class="btn btn-outline-dark btn-sm {% if current_urgent_filter is none and current_important_filter is none %}active{% endif %}">
+                    Todas
                 </a>
-                <a href="{{ url_for('index', urgent='true', important='true', view_mode=view_mode) }}" class="btn btn-outline-success btn-sm">Hacer</a>
-                <a href="{{ url_for('index', urgent='false', important='true', view_mode=view_mode) }}" class="btn btn-outline-warning btn-sm">Agendar</a>
-                <a href="{{ url_for('index', urgent='true', important='false', view_mode=view_mode) }}" class="btn btn-outline-primary btn-sm">Delegar</a>
-                <a href="{{ url_for('index', urgent='false', important='false', view_mode=view_mode) }}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                <a href="{{ url_for('index', urgent='true', important='true', view_mode=view_mode) }}" class="btn btn-outline-success btn-sm {% if current_urgent_filter == 'true' and current_important_filter == 'true' %}active{% endif %}">Hacer</a>
+                <a href="{{ url_for('index', urgent='false', important='true', view_mode=view_mode) }}" class="btn btn-outline-primary btn-sm {% if current_urgent_filter == 'false' and current_important_filter == 'true' %}active{% endif %}">Agendar</a>
+                <a href="{{ url_for('index', urgent='true', important='false', view_mode=view_mode) }}" class="btn btn-outline-warning btn-sm {% if current_urgent_filter == 'true' and current_important_filter == 'false' %}active{% endif %}">Delegar</a>
+                <a href="{{ url_for('index', urgent='false', important='false', view_mode=view_mode) }}" class="btn btn-outline-secondary btn-sm {% if current_urgent_filter == 'false' and current_important_filter == 'false' %}active{% endif %}">Eliminar</a>
             </div>
             <hr class="w-100 my-2 d-md-none">
-            <div class="view-mode-toggle d-flex gap-2">
-                <a href="{{ url_for('index', urgent=request.args.get('urgent'), important=request.args.get('important'), view_mode='list') }}"
+            <div class="view-mode-toggle">
+                <a href="{{ url_for('index', view_mode='list', urgent=current_urgent_filter, important=current_important_filter) }}"
                    class="btn btn-outline-primary {% if view_mode == 'list' %}active{% endif %}"
                    title="Vista de Lista">
                     <i class="bi bi-list-task"></i>
                 </a>
-                <a href="{{ url_for('index', urgent=request.args.get('urgent'), important=request.args.get('important'), view_mode='matrix') }}"
+                <a href="{{ url_for('index', view_mode='matrix', urgent=current_urgent_filter, important=current_important_filter) }}"
                    class="btn btn-outline-primary {% if view_mode == 'matrix' %}active{% endif %}"
                    title="Vista de Matriz">
                     <i class="bi bi-grid-fill"></i>
@@ -224,7 +194,7 @@
                 <input type="text" class="form-control" id="content" placeholder="Añadir nueva tarea..." name="content" required>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="isUrgent" name="is_urgent">
                         <label class="form-check-label" for="isUrgent">
@@ -232,7 +202,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="isImportant" name="is_important">
                         <label class="form-check-label" for="isImportant">
@@ -240,46 +210,22 @@
                         </label>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <label for="due_date" class="form-label visually-hidden">Fecha Límite</label>
+                    <input type="date" class="form-control" id="due_date" name="due_date">
+                </div>
             </div>
+            <input type="hidden" name="current_view_mode" value="{{ view_mode }}">
+            <input type="hidden" name="current_urgent_filter" value="{{ current_urgent_filter if current_urgent_filter is not none else '' }}">
+            <input type="hidden" name="current_important_filter" value="{{ current_important_filter if current_important_filter is not none else '' }}">
+            
             <button type="submit" class="btn btn-primary w-100">Añadir Tarea</button>
         </form>
 
-        {% if show_all_quadrants %}
-            {% if view_mode == 'list' %}
-                <ul class="list-group">
-                    {% for key, quadrant_data in quadrants.items() %}
-                        {% if quadrant_data.tasks %}
-                            <div class="quadrant-section {{ quadrant_data.class }}">
-                                <h2 class="quadrant-title {{ quadrant_data.class }}">
-                                    {{ quadrant_data.title }} ({{ quadrant_counts[key] }})
-                                </h2>
-                                <ul class="list-group">
-                                    {% for task in quadrant_data.tasks %}
-                                        <li class="list-group-item d-flex justify-content-between align-items-center {{ quadrant_data.class }}">
-                                            <div>
-                                                <a href="{{ url_for('complete_task', task_id=task.id) }}"
-                                                   class="btn btn-sm {% if task.completed %}btn-secondary{% else %}btn-success{% endif %} me-2"
-                                                   title="{% if task.completed %}Marcar como Pendiente{% else %}Marcar como Completada{% endif %}">
-                                                   {% if task.completed %} &#x21BA; {% else %} &#10003; {% endif %}
-                                                </a>
-                                                <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
-                                                {% if task.is_urgent %} <span class="badge bg-danger ms-2">Urgente</span> {% else %} <span class="badge bg-secondary ms-2">No Urgente</span> {% endif %}
-                                                {% if task.is_important %} <span class="badge bg-primary ms-1">Importante</span> {% else %} <span class="badge bg-secondary ms-1">No Importante</span> {% endif %}
-                                            </div>
-                                            <div>
-                                                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
-                                                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            {% elif view_mode == 'matrix' %}
-                <div class="quadrant-grid">
-                    {% for key in ['do', 'schedule', 'delegate', 'eliminate'] %}
+        {# Main Display Logic #}
+        {% if view_mode == 'matrix' %}
+            <div class="quadrant-grid">
+                {% for key in ['do', 'schedule', 'delegate', 'eliminate'] %}
                     <div class="quadrant-cell {{ quadrants[key].class }}">
                         <h3 class="quadrant-title {{ quadrants[key].class }}">
                             {{ quadrants[key].title.split(':')[1].split('(')[0].strip() }} ({{ quadrant_counts[key] }})
@@ -289,16 +235,19 @@
                                 {% for task in quadrants[key].tasks %}
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div>
-                                            <a href="{{ url_for('complete_task', task_id=task.id) }}"
+                                            <a href="{{ url_for('complete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}"
                                                class="btn btn-sm {% if task.completed %}btn-secondary{% else %}btn-success{% endif %} me-2"
                                                title="{% if task.completed %}Marcar como Pendiente{% else %}Marcar como Completada{% endif %}">
                                                {% if task.completed %} &#x21BA; {% else %} &#10003; {% endif %}
                                             </a>
                                             <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
+                                            {% if task.due_date %}
+                                            <span class="badge bg-info ms-1">Vence: {{ task.due_date.strftime('%d-%m-%Y') }}</span>
+                                            {% endif %}
                                         </div>
                                         <div>
                                             <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
-                                            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                                            <a href="{{ url_for('delete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}" class="btn btn-danger btn-sm">Eliminar</a>
                                         </div>
                                     </li>
                                 {% endfor %}
@@ -307,72 +256,124 @@
                             <p class="text-muted text-center mt-3">No hay tareas en este cuadrante.</p>
                         {% endif %}
                     </div>
+                {% endfor %}
+            </div>
+        {% elif view_mode == 'list' %}
+            <div class="list-group">
+                {% if show_all_quadrants %}
+                    {% for key, quadrant_data in quadrants.items() %}
+                        {% if quadrant_data.tasks %}
+                            <div class="quadrant-section {{ quadrant_data.class }}">
+                                <h2 class="quadrant-title {{ quadrant_data.class }}">{{ quadrant_data.title }} ({{ quadrant_counts[key] }})</h2>
+                                <ul class="list-group">
+                                    {% for task in quadrant_data.tasks %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center {{ quadrant_data.class }}">
+                                            <div>
+                                                <a href="{{ url_for('complete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}"
+                                                   class="btn btn-sm {% if task.completed %}btn-secondary{% else %}btn-success{% endif %} me-2"
+                                                   title="{% if task.completed %}Marcar como Pendiente{% else %}Marcar como Completada{% endif %}">
+                                                   {% if task.completed %} &#x21BA; {% else %} &#10003; {% endif %}
+                                                </a>
+                                                <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
+                                                {% if task.is_urgent %}
+                                                    <span class="badge bg-danger ms-2">Urgente</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary ms-2">No Urgente</span>
+                                                {% endif %}
+                                                {% if task.is_important %}
+                                                    <span class="badge bg-primary ms-1">Importante</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary ms-1">No Importante</span>
+                                                {% endif %}
+                                                {% if task.due_date %}
+                                                    <span class="badge bg-info ms-1">Fecha Límite: {{ task.due_date.strftime('%d-%m-%Y') }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <div>
+                                                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
+                                                <a href="{{ url_for('delete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
                     {% endfor %}
-                </div>
-            {% endif %}
-        {% else %}
-            <ul class="list-group">
-                {% if tasks %}
-                    {% for task in tasks %}
-                    {% set current_quadrant_class = '' %}
-                    {% if task.is_urgent and task.is_important %}
-                        {% set current_quadrant_class = 'quadrant-1' %}
-                    {% elif not task.is_urgent and task.is_important %}
-                        {% set current_quadrant_class = 'quadrant-2' %}
-                    {% elif task.is_urgent and not task.is_important %}
-                        {% set current_quadrant_class = 'quadrant-3' %}
+                {% else %} {# This is the simple filtered list view #}
+                    {% if tasks %}
+                        <ul class="list-group">
+                            {% for task in tasks %}
+                                {% set current_quadrant_class = '' %}
+                                {% if task.is_urgent and task.is_important %}
+                                    {% set current_quadrant_class = 'quadrant-1' %}
+                                {% elif not task.is_urgent and task.is_important %}
+                                    {% set current_quadrant_class = 'quadrant-2' %}
+                                {% elif task.is_urgent and not task.is_important %}
+                                    {% set current_quadrant_class = 'quadrant-3' %}
+                                {% else %}
+                                    {% set current_quadrant_class = 'quadrant-4' %}
+                                {% endif %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center {{ current_quadrant_class }}">
+                                    <div>
+                                        <a href="{{ url_for('complete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}"
+                                           class="btn btn-sm {% if task.completed %}btn-secondary{% else %}btn-success{% endif %} me-2"
+                                           title="{% if task.completed %}Marcar como Pendiente{% else %}Marcar como Completada{% endif %}">
+                                           {% if task.completed %} &#x21BA; {% else %} &#10003; {% endif %}
+                                        </a>
+                                        <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
+                                        {% if task.is_urgent %}
+                                            <span class="badge bg-danger ms-2">Urgente</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary ms-2">No Urgente</span>
+                                        {% endif %}
+                                        {% if task.is_important %}
+                                            <span class="badge bg-primary ms-1">Importante</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary ms-1">No Importante</span>
+                                        {% endif %}
+                                        {% if task.due_date %}
+                                            <span class="badge bg-info ms-1">Fecha Límite: {{ task.due_date.strftime('%d-%m-%Y') }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
+                                        <a href="{{ url_for('delete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     {% else %}
-                        {% set current_quadrant_class = 'quadrant-4' %}
+                        <li class="list-group-item text-center text-muted">No hay tareas que coincidan con los filtros seleccionados.</li>
                     {% endif %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center {{ current_quadrant_class }}">
-                        <div>
-                            <a href="{{ url_for('complete_task', task_id=task.id) }}"
-                               class="btn btn-sm {% if task.completed %}btn-secondary{% else %}btn-success{% endif %} me-2"
-                               title="{% if task.completed %}Marcar como Pendiente{% else %}Marcar como Completada{% endif %}">
-                               {% if task.completed %} &#x21BA; {% else %} &#10003; {% endif %}
-                            </a>
-                            <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
-                            {% if task.is_urgent %} <span class="badge bg-danger ms-2">Urgente</span> {% else %} <span class="badge bg-secondary ms-2">No Urgente</span> {% endif %}
-                            {% if task.is_important %} <span class="badge bg-primary ms-1">Importante</span> {% else %} <span class="badge bg-secondary ms-1">No Importante</span> {% endif %}
-                        </div>
-                        <div>
-                            <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-info btn-sm me-2">Editar</a>
-                            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                        </div>
-                    </li>
-                    {% endfor %}
-                {% else %}
-                    <li class="list-group-item text-center text-muted">No hay tareas que coincidan con los filtros seleccionados.</li>
                 {% endif %}
-            </ul>
+            </div>
         {% endif %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1bK7dK6p5I/zjt9Gg" crossorigin="anonymous"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const darkModeToggle = document.getElementById('darkModeToggle');
-            const body = document.body;
+        // Dark Mode Toggle Logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
 
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-                darkModeToggle.innerHTML = '&#9790;';
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>'; // Sun icon for light mode
+        } else {
+            darkModeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Moon icon for dark mode
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
             } else {
-                darkModeToggle.innerHTML = '&#9728;';
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
             }
-
-            darkModeToggle.addEventListener('click', function() {
-                if (body.classList.contains('dark-mode')) {
-                    body.classList.remove('dark-mode');
-                    localStorage.setItem('theme', 'light');
-                    darkModeToggle.innerHTML = '&#9728;';
-                } else {
-                    body.classList.add('dark-mode');
-                    localStorage.setItem('theme', 'dark');
-                    darkModeToggle.innerHTML = '&#9790;';
-                }
-            });
         });
     </script>
 </body>

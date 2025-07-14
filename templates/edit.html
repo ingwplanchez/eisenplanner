@@ -3,51 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Tarea (EisenPlanner)</title>
+    <title>Editar Tarea</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        body.dark-mode .container {
+            background-color: #343a40;
+            box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
+        }
+        body.dark-mode .form-control {
+            background-color: #454d55;
+            color: #f8f9fa;
+            border-color: #5a6268;
+        }
+        body.dark-mode .form-control::placeholder {
+            color: #ced4da;
+        }
+        body.dark-mode .form-label {
+            color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4 text-center">Editar Tarea</h1>
-
-        {% if task %}
-        <form action="{{ url_for('update_task', task_id=task.id) }}" method="POST" class="p-3 border rounded shadow-sm">
+        <form action="{{ url_for('update_task', task_id=task.id) }}" method="POST">
             <div class="mb-3">
-                <label for="taskContent" class="form-label">Contenido de la Tarea:</label>
-                <input type="text" class="form-control" id="taskContent" name="content" value="{{ task.content }}" required>
+                <label for="content" class="form-label">Contenido de la Tarea</label>
+                <input type="text" class="form-control" id="content" name="content" value="{{ task.content }}" required>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6"> {# Ajustamos a col-md-6 #}
+                <div class="col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="editIsUrgent" name="is_urgent" {% if task.is_urgent %}checked{% endif %}>
-                        <label class="form-check-label" for="editIsUrgent">
+                        <input class="form-check-input" type="checkbox" id="isUrgent" name="is_urgent" {% if task.is_urgent %}checked{% endif %}>
+                        <label class="form-check-label" for="isUrgent">
                             Urgente
                         </label>
                     </div>
                 </div>
-                <div class="col-md-6"> {# Ajustamos a col-md-6 #}
+                <div class="col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="editIsImportant" name="is_important" {% if task.is_important %}checked{% endif %}>
-                        <label class="form-check-label" for="editIsImportant">
+                        <input class="form-check-input" type="checkbox" id="isImportant" name="is_important" {% if task.is_important %}checked{% endif %}>
+                        <label class="form-check-label" for="isImportant">
                             Importante
                         </label>
                     </div>
                 </div>
-                {# <div class="col-md-4"> #}
-                {#     <label for="editDueDate" class="form-label">Fecha Límite:</label> #}
-                {#     <input type="date" class="form-control" id="editDueDate" name="due_date" #}
-                {#            value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}"> #}
-                {# </div> #} {# <-- ELIMINA O COMENTA ESTE DIV COMPLETO #}
+                <div class="col-12 mt-3">
+                    <label for="due_date" class="form-label">Fecha Límite (opcional):</label>
+                    <input type="date" class="form-control" id="due_date" name="due_date" 
+                           value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}">
+                </div>
             </div>
-            <button type="submit" class="btn btn-success me-2">Guardar Cambios</button>
-            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+            <input type="hidden" name="current_view_mode" value="{{ request.args.get('view_mode', 'list') }}">
+            <input type="hidden" name="current_urgent_filter" value="{{ request.args.get('urgent', '') }}">
+            <input type="hidden" name="current_important_filter" value="{{ request.args.get('important', '') }}">
+
+            <button type="submit" class="btn btn-success me-2">Actualizar Tarea</button>
+            <a href="{{ url_for('index', view_mode=request.args.get('view_mode', 'list'), urgent=request.args.get('urgent'), important=request.args.get('important')) }}" class="btn btn-secondary">Cancelar</a>
         </form>
-        {% else %}
-        <p class="text-center text-danger">Tarea no encontrada.</p>
-        <p class="text-center"><a href="{{ url_for('index') }}" class="btn btn-primary">Volver al Inicio</a></p>
-        {% endif %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1bK7dK6p5I/zjt9Gg" crossorigin="anonymous"></script>
+    <script>
+        // Dark Mode Logic for edit.html (optional, copy from index.html if needed)
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+    </script>
 </body>
 </html>
