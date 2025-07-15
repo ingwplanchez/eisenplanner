@@ -233,6 +233,87 @@
             display: flex;
             gap: 0.5rem;
         }
+
+        /* Ajuste específico para el botón "Todas" en modo oscuro */
+        /* Cuando NO está activo: Borde y texto blanco/claro, fondo transparente */
+        body.dark-mode .btn-outline-dark:not(.active) {
+            color: #f8f9fa;
+            /* Texto blanco */
+            border-color: #f8f9fa;
+            /* Borde blanco */
+            background-color: transparent;
+            /* Fondo transparente (se verá el oscuro del body) */
+        }
+
+        /* Cuando NO está activo y el mouse pasa por encima (hover): Ligeramente más oscuro, con borde blanco */
+        body.dark-mode .btn-outline-dark:not(.active):hover {
+            background-color: rgba(248, 249, 250, 0.1);
+            /* Un blanco muy tenue para el hover */
+            color: #f8f9fa;
+            /* Texto blanco */
+            border-color: #f8f9fa;
+            /* Borde blanco */
+        }
+
+        /* Cuando está activo: Mantener el estilo oscuro/claro por defecto de Bootstrap (que se ve bien para btn-outline-dark en modo oscuro) */
+        body.dark-mode .btn-outline-dark.active {
+            background-color: #f8f9fa !important;
+            /* Fondo blanco */
+            color: #212529 !important;
+            /* Texto negro */
+            border-color: #f8f9fa !important;
+            /* Borde blanco */
+        }
+
+        /* Ajustes para los otros botones de cuadrante en modo oscuro */
+        body.dark-mode .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+        body.dark-mode .btn-outline-success:hover,
+        body.dark-mode .btn-outline-success.active {
+            background-color: #28a745;
+            color: #fff;
+            border-color: #28a745;
+        }
+
+        body.dark-mode .btn-outline-warning {
+            color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        body.dark-mode .btn-outline-warning:hover,
+        body.dark-mode .btn-outline-warning.active {
+            background-color: #ffc107;
+            color: #212529;
+            /* Texto oscuro para el amarillo */
+            border-color: #ffc107;
+        }
+
+        body.dark-mode .btn-outline-primary {
+            color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        body.dark-mode .btn-outline-primary:hover,
+        body.dark-mode .btn-outline-primary.active {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+
+        body.dark-mode .btn-outline-danger {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        body.dark-mode .btn-outline-danger:hover,
+        body.dark-mode .btn-outline-danger.active {
+            background-color: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+        }
     </style>
 </head>
 
@@ -367,7 +448,8 @@
                         <div>
                             <a href="{{ url_for('complete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}"
                                 class="btn btn-sm {% if task.completed %}btn-warning{% else %}btn-success{% endif %} me-2">
-                                <i class="bi {% if task.completed %}bi-arrow-counterclockwise{% else %}bi-check-lg{% endif %}"></i>
+                                <i
+                                    class="bi {% if task.completed %}bi-arrow-counterclockwise{% else %}bi-check-lg{% endif %}"></i>
                             </a>
                             <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
                             {% if task.is_urgent %}
@@ -420,7 +502,8 @@
                     <div>
                         <a href="{{ url_for('complete_task', task_id=task.id, view_mode=view_mode, urgent=current_urgent_filter, important=current_important_filter) }}"
                             class="btn btn-sm {% if task.completed %}btn-warning{% else %}btn-success{% endif %} me-2">
-                            <i class="bi {% if task.completed %}bi-arrow-counterclockwise{% else %}bi-check-lg{% endif %}"></i>
+                            <i
+                                class="bi {% if task.completed %}bi-arrow-counterclockwise{% else %}bi-check-lg{% endif %}"></i>
                         </a>
                         <span class="{% if task.completed %}completed{% endif %}">{{ task.content }}</span>
                         {% if task.is_urgent %}
