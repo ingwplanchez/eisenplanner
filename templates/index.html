@@ -253,11 +253,11 @@
                 <a href="{{ url_for('index', urgent='true', important='true', view_mode=view_mode) }}"
                     class="btn btn-outline-success btn-sm {% if current_urgent_filter == 'true' and current_important_filter == 'true' %}active{% endif %}">Hacer</a>
                 <a href="{{ url_for('index', urgent='false', important='true', view_mode=view_mode) }}"
-                    class="btn btn-outline-primary btn-sm {% if current_urgent_filter == 'false' and current_important_filter == 'true' %}active{% endif %}">Agendar</a>
+                    class="btn btn-outline-warning  btn-sm {% if current_urgent_filter == 'false' and current_important_filter == 'true' %}active{% endif %}">Agendar</a>
                 <a href="{{ url_for('index', urgent='true', important='false', view_mode=view_mode) }}"
-                    class="btn btn-outline-warning btn-sm {% if current_urgent_filter == 'true' and current_important_filter == 'false' %}active{% endif %}">Delegar</a>
+                    class="btn btn-outline-primary btn-sm {% if current_urgent_filter == 'true' and current_important_filter == 'false' %}active{% endif %}">Delegar</a>
                 <a href="{{ url_for('index', urgent='false', important='false', view_mode=view_mode) }}"
-                    class="btn btn-outline-secondary btn-sm {% if current_urgent_filter == 'false' and current_important_filter == 'false' %}active{% endif %}">Eliminar</a>
+                    class="btn btn-outline-danger btn-sm {% if current_urgent_filter == 'false' and current_important_filter == 'false' %}active{% endif %}">Eliminar</a>
             </div>
             <hr class="w-100 my-2 d-md-none">
             <div class="view-mode-toggle">
