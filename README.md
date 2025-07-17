@@ -63,20 +63,20 @@ Este proyecto nace como una evolución del código de [Flasktasker v2.0](https:/
 
 ## ✅ Mejoras Implementadas
 
-- [x] Visualización interactiva de tareas según cuadrantes
-- [x] Etiquetado automático por urgencia/importancia
-- [x] Vista de Lista y de cuadrantes
-- [x] Fechas límite (Ley de Parkinson)
-- [x] Tareas ordenadas por fecha de vencimiento
-- [x] Modo Oscuro
+- [x] Visualización interactiva de tareas según cuadrantes.
+- [x] Etiquetado automático por urgencia/importancia.
+- [x] Vista de Lista y de cuadrantes.
+- [x] Fechas límite (Ley de Parkinson).
+- [x] Tareas ordenadas por fecha de vencimiento.
+- [x] Modo Oscuro.
 
 ---
 
 ## 🌱 Próximos Pasos
 
-- Sección de Tareas completadas (Opcional)
-- Perfil de invitado (Sin persistencia de Datos)
-- Autenticación de usuarios (Con persistencia de Datos)
+- Sección de Tareas completadas (Opcional).
+- Perfil de invitado (Sin persistencia de Datos).
+- Autenticación de usuarios (Con persistencia de Datos).
 
 ---
 
@@ -86,10 +86,9 @@ Para configurar y ejecutar EisenPlanner en tu máquina local, sigue estos pasos:
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone https://github.com/tu-usuario/EisenPlanner.git
+    git clone https://github.com/ingwplanchez/eisenplanner.git
     cd EisenPlanner
     ```
-    (Asegúrate de reemplazar `tu-usuario/EisenPlanner.git` con la URL real de tu repositorio).
 
 2.  **Crea un entorno virtual (recomendado):**
     ```bash
@@ -176,5 +175,5 @@ EisenPlanner/
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia [MIT](LICENSE), lo que permite su uso y modificación libre siempre que se otorgue el debido crédito.
+Este proyecto está bajo la licencia [MIT](https://es.wikipedia.org/wiki/Licencia_MIT), lo que permite su uso y modificación libre siempre que se otorgue el debido crédito.
 
