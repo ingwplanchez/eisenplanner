@@ -204,7 +204,7 @@ EisenPlanner/
 
 ## 📝 Créditos
 
-- 🛠️ Base de código reutilizada de **Flasktasker v2.0**, desarrollada originalmente como una herramienta de gestión de tareas simple.
+- 🛠️ Base de código reutilizada de [Flasktasker v2.0](https://github.com/ingwplanchez/flasktasker.git), desarrollada originalmente como una herramienta de gestión de tareas simple.
 - 🎯 Eisenplanner evoluciona esta idea hacia una herramienta de productividad estratégica basada en la matriz de Eisenhower.
 
 ---
