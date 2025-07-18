@@ -71,7 +71,7 @@ Aquí puedes ver Eisenplanner en acción, mostrando sus diferentes vistas y el s
 #### Modo Oscuro:
 ![alt text](screenshots/list_view_dark.png)
 
-## Filtro por Cuadrante
+### Filtro por Cuadrante
 
 #### Modo Claro:
 ![alt text](screenshots/list_view_tasks_light.png)
