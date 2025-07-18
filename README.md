@@ -60,6 +60,42 @@ Este proyecto nace como una evolución del código de [Flasktasker v2.0](https:/
 * **Interfaz Responsiva:** Adaptada para funcionar y verse bien en dispositivos de diferentes tamaños, desde computadoras de escritorio hasta teléfonos móviles.
 
 ---
+## Capturas de Pantalla
+Aquí puedes ver Eisenplanner en acción, mostrando sus diferentes vistas y el soporte para el modo claro y oscuro.
+
+### Vista de Lista 
+
+#### Modo Claro:
+![alt text](screenshots/list_view_light.png)
+
+#### Modo Oscuro:
+![alt text](screenshots/list_view_dark.png)
+
+## Filtro por Cuadrante
+
+#### Modo Claro:
+![alt text](screenshots/list_view_tasks_light.png)
+
+#### Modo Oscuro:
+![alt text](screenshots/list_view_tasks_dark.png)
+
+### Vista de Matriz (Eisenhower)
+
+#### Modo Claro:
+![alt text](screenshots/matrix_view_light.png)
+
+#### Modo Oscuro:
+![alt text](screenshots/matrix_view_dark.png)
+
+### Edición de Tarea
+
+#### Modo Claro:
+![alt text](screenshots/edit_view_light.png)
+
+#### Modo Oscuro:
+![alt text](screenshots/edit_view_dark.png)
+
+---
 
 ## ✅ Mejoras Implementadas
 
